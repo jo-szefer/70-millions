@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+
+import { addProduct, sellProduct } from "../../actions";
 
 import { itemsList } from "./itemsList";
 
@@ -63,19 +66,33 @@ const StyledButton = styled.button`
   background: linear-gradient(rgb(46, 204, 113), rgb(26, 188, 156));
 `;
 
-export const Items = () => {
+const _Items = (props) => {
   return (
     <ItemsWrapper>
       {itemsList.map((item) => (
         <StyledItem>
           <img src={item.image} />
           <span>{item.name}</span>
-          <span>{item.price} zł</span>
-          <input></input>
-          <button>Kup</button>
-          <button>Sprzedaj</button>
+          <span className="price">{item.price} zł</span>
+          <Buttons>
+            <StyledButton onClick={() => props.addProduct(item)}>
+              Kup
+            </StyledButton>
+            <StyledButton onClick={() => props.sellProduct(item)}>
+              Sprzedaj
+            </StyledButton>
+          </Buttons>
         </StyledItem>
       ))}
     </ItemsWrapper>
   );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addProduct: (item) => dispatch(addProduct(item)),
+    sellProduct: (item) => dispatch(sellProduct(item)),
+  };
+};
+
+export const Items = connect(null, mapDispatchToProps)(_Items);
