@@ -54,6 +54,7 @@ const Buttons = styled.div`
 `;
 
 const StyledButton = styled.button`
+  outline: none;
   font-size: 16px;
   cursor: pointer;
   margin: 5px;
@@ -71,7 +72,7 @@ const _Items = (props) => {
     <ItemsWrapper>
       {itemsList.map((item) => (
         <StyledItem>
-          <img src={item.image} />
+          <img src={item.image} alt="product" />
           <span>{item.name}</span>
           <span className="price">{item.price} zł</span>
           <Buttons>
