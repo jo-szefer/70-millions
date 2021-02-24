@@ -12,16 +12,24 @@ export const reducer = (state = initialState, action) => {
     case "ADD_PRODUCT":
       return {
         ...state,
-        money: state.money - action.product.price,
+        money:
+          state.money - action.product.price >= 0
+            ? state.money - action.product.price
+            : state.money,
         products:
-          index === -1
-            ? [...state.products, { ...action.product, quantity: 1 }]
-            : increaseQuantity(state.products, index),
+          state.money - action.product.price >= 0
+            ? index === -1
+              ? [...state.products, { ...action.product, quantity: 1 }]
+              : increaseQuantity(state.products, index)
+            : state.products,
       };
     case "SELL_PRODUCT":
       return {
         ...state,
-        money: index === -1 ? state.money : state.money + action.product.price,
+        money:
+          index === -1
+            ? state.money
+            : increaseMoney(state.products, index, state.money),
         products:
           index === -1
             ? state.products
@@ -49,4 +57,12 @@ const decreaseQuantity = (products, index) => {
     newProducts[index].quantity--;
   }
   return newProducts;
+};
+
+const increaseMoney = (products, index, money) => {
+  if (products[index].quantity === 0) {
+    return money;
+  } else {
+    return money + products[index].price;
+  }
 };
