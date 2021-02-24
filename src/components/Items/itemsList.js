@@ -20,7 +20,7 @@ export const itemsList = [
   { name: "Abonament Netflix", image: netflixJPG, price: 30 },
   { name: "Dron", image: dronJPG, price: 460 },
   { name: "Cieplutkie bambosze", image: kapcieJPG, price: 15 },
-  { name: "kon", image: konJPG, price: 30000 },
+  { name: "Koń", image: konJPG, price: 30000 },
   { name: "Ładny dom", image: whiteHouseJPG, price: 70000000 },
   { name: "Niezła książka", image: bibliaJPG, price: 60 },
   { name: "Helikopter", image: helikopterJPG, price: 400000 },
